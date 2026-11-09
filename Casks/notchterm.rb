@@ -12,15 +12,9 @@ cask "notchterm" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "NotchTerm.app"
-
-  # L'app è firmata ad-hoc ma non notarizzata: senza questo Gatekeeper la bloccherebbe.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/NotchTerm.app"]
-  end
 
   uninstall quit: "net.sangalli.notchterm"
 
