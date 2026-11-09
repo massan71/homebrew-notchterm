@@ -6,6 +6,9 @@ Tap Homebrew per [NotchTerm](https://github.com/massan71/NotchTerm), il terminal
 brew install --cask massan71/notchterm/notchterm
 ```
 
+NotchTerm non è notarizzato: al primo avvio sbloccalo da Impostazioni di Sistema → Privacy e sicurezza →
+"Apri comunque", oppure con `xattr -dr com.apple.quarantine /Applications/NotchTerm.app`.
+
 Aggiornare: `brew upgrade --cask notchterm` · Disinstallare: `brew uninstall --cask notchterm`
 (`--zap` rimuove anche configurazione e integrazione shell).
 

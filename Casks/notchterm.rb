@@ -18,6 +18,12 @@ cask "notchterm" do
 
   uninstall quit: "net.sangalli.notchterm"
 
+  caveats <<~EOS
+    NotchTerm non è notarizzato da Apple: al primo avvio macOS lo blocca.
+    Sbloccalo da Impostazioni di Sistema → Privacy e sicurezza → "Apri comunque", oppure:
+      xattr -dr com.apple.quarantine #{appdir}/NotchTerm.app
+  EOS
+
   zap trash: [
     "~/.config/notchterm",
     "~/Library/Application Support/NotchTerm",
