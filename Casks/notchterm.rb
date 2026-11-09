@@ -1,0 +1,31 @@
+cask "notchterm" do
+  version "0.3.0"
+  sha256 "15ebd365510fb9cde56a56f3d35df1b78078c64f1dca47e72b59504273d51187"
+
+  url "https://github.com/massan71/NotchTerm/releases/download/v#{version}/NotchTerm-#{version}.zip"
+  name "NotchTerm"
+  desc "Quake-style drop-down terminal that slides out of the notch"
+  homepage "https://github.com/massan71/NotchTerm"
+
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
+  depends_on macos: ">= :ventura"
+
+  app "NotchTerm.app"
+
+  # L'app è firmata ad-hoc ma non notarizzata: senza questo Gatekeeper la bloccherebbe.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/NotchTerm.app"]
+  end
+
+  uninstall quit: "net.sangalli.notchterm"
+
+  zap trash: [
+    "~/.config/notchterm",
+    "~/Library/Application Support/NotchTerm",
+  ]
+end
